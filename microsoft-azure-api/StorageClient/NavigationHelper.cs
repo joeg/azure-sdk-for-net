@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------------
 // <copyright file="NavigationHelper.cs" company="Microsoft">
-//    Copyright 2011 Microsoft Corporation
+//    Copyright 2012 Microsoft Corporation
 //
 //    Licensed under the Apache License, Version 2.0 (the "License");
 //    you may not use this file except in compliance with the License.
@@ -362,6 +362,17 @@ namespace Microsoft.WindowsAzure.StorageClient
         /// <param name="usePathStyleUris">If set to <c>true</c> use path style Uris.</param>
         /// <returns>The queue name.</returns>
         internal static string GetQueueNameFromUri(Uri uri, bool usePathStyleUris)
+        {
+            return GetContainerNameFromContainerAddress(uri, usePathStyleUris);
+        }
+
+        /// <summary>
+        /// Extracts a table name from the table's Uri.
+        /// </summary>
+        /// <param name="uri">The queue Uri.</param>
+        /// <param name="usePathStyleUris">If set to <c>true</c> use path style Uris.</param>
+        /// <returns>The queue name.</returns>
+        internal static string GetTableNameFromUri(Uri uri, bool usePathStyleUris)
         {
             return GetContainerNameFromContainerAddress(uri, usePathStyleUris);
         }

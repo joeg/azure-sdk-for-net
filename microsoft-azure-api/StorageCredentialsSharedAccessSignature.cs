@@ -1,6 +1,6 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="StorageCredentialsSharedAccessSignature.cs" company="Microsoft">
-//    Copyright 2011 Microsoft Corporation
+//    Copyright 2012 Microsoft Corporation
 //
 //    Licensed under the Apache License, Version 2.0 (the "License");
 //    you may not use this file except in compliance with the License.
@@ -184,7 +184,7 @@ namespace Microsoft.WindowsAzure
         /// </returns>
         protected internal override string ToString(bool exportSecrets)
         {
-            return String.Format("{0}={1}", CloudStorageAccount.SharedAccessSignatureName, exportSecrets ? this.token : "[signature hidden]");
+            return String.Format("{0}={1}", CloudStorageAccount.SharedAccessSignatureSettingString, exportSecrets ? this.token : "[signature hidden]");
         }
     }
 }

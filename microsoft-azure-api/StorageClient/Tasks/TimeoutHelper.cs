@@ -1,6 +1,6 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="TimeoutHelper.cs" company="Microsoft">
-//    Copyright 2011 Microsoft Corporation
+//    Copyright 2012 Microsoft Corporation
 //
 //    Licensed under the Apache License, Version 2.0 (the "License");
 //    you may not use this file except in compliance with the License.
@@ -56,7 +56,7 @@ namespace Microsoft.WindowsAzure.StorageClient.Tasks
         /// </summary>
         /// <param name="timeout">The timeout.</param>
         /// <returns>A localized <see cref="TimeoutException"/> object.</returns>
-        internal static Exception ThrowTimeoutError(TimeSpan timeout)
+        internal static Exception GenerateTimeoutError(TimeSpan timeout)
         {
             TraceHelper.WriteLine("ThrowTimeoutError " + timeout);
 
@@ -86,7 +86,7 @@ namespace Microsoft.WindowsAzure.StorageClient.Tasks
                 scratch = timeoutTask.Result;
             }
 
-            throw ThrowTimeoutError(timeout);
+            throw GenerateTimeoutError(timeout);
         }
     }
 }

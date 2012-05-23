@@ -1,6 +1,6 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="CloudStorageAccountStorageClientExtensions.cs" company="Microsoft">
-//    Copyright 2011 Microsoft Corporation
+//    Copyright 2012 Microsoft Corporation
 //
 //    Licensed under the Apache License, Version 2.0 (the "License");
 //    you may not use this file except in compliance with the License.
@@ -65,11 +65,6 @@ namespace Microsoft.WindowsAzure.StorageClient
                 throw new InvalidOperationException("No credentials provided.");
             }
 
-            if (!account.Credentials.CanSignRequest)
-            {
-                throw new InvalidOperationException("CloudQueueClient requires a credential that can sign request");
-            }
-
             return new CloudQueueClient(account.QueueEndpoint, account.Credentials);
         }
 
@@ -88,11 +83,6 @@ namespace Microsoft.WindowsAzure.StorageClient
             if (account.Credentials == null)
             {
                 throw new InvalidOperationException("No credentials provided.");
-            }
-
-            if (!account.Credentials.CanSignRequest || !account.Credentials.CanSignRequestLite)
-            {
-                throw new InvalidOperationException("CloudTableClient requires a credential that can sign request");
             }
 
             return new CloudTableClient(account.TableEndpoint, account.Credentials);
