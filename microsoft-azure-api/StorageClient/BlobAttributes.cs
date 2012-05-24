@@ -1,6 +1,6 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="BlobAttributes.cs" company="Microsoft">
-//    Copyright 2011 Microsoft Corporation
+//    Copyright 2012 Microsoft Corporation
 //
 //    Licensed under the Apache License, Version 2.0 (the "License");
 //    you may not use this file except in compliance with the License.
@@ -82,5 +82,11 @@ namespace Microsoft.WindowsAzure.StorageClient
         /// If the blob is not a snapshot, the value of this property is <c>null</c>.
         /// </remarks>
         public DateTime? Snapshot { get; internal set; }
+
+        /// <summary>
+        /// Gets the state of the most recent or pending copy operation.
+        /// </summary>
+        /// <value>A <see cref="CopyState"/> object containing the copy state, or null if no copy blob state exists for this blob.</value>
+        public CopyState CopyState { get; internal set; }
     }
 }

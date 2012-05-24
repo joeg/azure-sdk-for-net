@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------------
 // <copyright file="TableServiceContext.cs" company="Microsoft">
-//    Copyright 2011 Microsoft Corporation
+//    Copyright 2012 Microsoft Corporation
 //
 //    Licensed under the Apache License, Version 2.0 (the "License");
 //    you may not use this file except in compliance with the License.
@@ -47,11 +47,6 @@ namespace Microsoft.WindowsAzure.StorageClient
             if (credentials == null)
             {
                 throw new ArgumentNullException("credentials");
-            }
-
-            if ((!credentials.CanSignRequest) || (!credentials.CanSignRequestLite))
-            {
-                throw new ArgumentException(SR.CredentialsCantSignRequest, "credentials");
             }
 
             SendingRequest += new EventHandler<SendingRequestEventArgs>(this.DataContextSendingRequest);
@@ -159,11 +154,25 @@ namespace Microsoft.WindowsAzure.StorageClient
         {
             HttpWebRequest request = e.Request as HttpWebRequest;
 
+            if (StorageCredentials.NeedsTransformUri)
+            {
+                string transformedUri = StorageCredentials.TransformUri(request.RequestUri.AbsoluteUri);
+
+                // Recreate the request
+                HttpWebRequest newRequest = WebRequest.Create(transformedUri) as HttpWebRequest;
+                Utilities.CopyRequestData(newRequest, request);
+                e.Request = newRequest;
+                request = newRequest;
+            }
+
             request.Headers.Add(
                 Protocol.Constants.HeaderConstants.StorageVersionHeader,
                 Protocol.Request.GetTargetVersion());
 
-            StorageCredentials.SignRequestLite(request);
+            if (StorageCredentials.CanSignRequestLite)
+            {
+                StorageCredentials.SignRequestLite(request);
+            }
 
             CommonUtils.ApplyRequestOptimizations(request, -1);
         }

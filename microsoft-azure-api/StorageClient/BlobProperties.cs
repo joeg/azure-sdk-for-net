@@ -1,6 +1,6 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="BlobProperties.cs" company="Microsoft">
-//    Copyright 2011 Microsoft Corporation
+//    Copyright 2012 Microsoft Corporation
 //
 //    Licensed under the Apache License, Version 2.0 (the "License");
 //    you may not use this file except in compliance with the License.
@@ -101,7 +101,7 @@ namespace Microsoft.WindowsAzure.StorageClient
         /// <summary>
         /// Gets the blob's ETag value.
         /// </summary>
-        /// <value>The blob's ETag value.</value>
+        /// <value>The blob's quoted ETag value.</value>
         [System.Diagnostics.CodeAnalysis.SuppressMessage(
             "Microsoft.Naming",
             "CA1702:CompoundWordsShouldBeCasedCorrectly",
@@ -126,5 +126,17 @@ namespace Microsoft.WindowsAzure.StorageClient
         /// </summary>
         /// <value>A <see cref="LeaseStatus"/> object that indicates the blob's lease status.</value>
         public LeaseStatus LeaseStatus { get; internal set; }
+
+        /// <summary>
+        /// Gets the blob's lease state.
+        /// </summary>
+        /// <value>A <see cref="LeaseState"/> object that indicates the blob's lease state.</value>
+        public LeaseState LeaseState { get; internal set; }
+
+        /// <summary>
+        /// Gets the blob's lease duration.
+        /// </summary>
+        /// <value>A <see cref="LeaseDuration"/> object that indicates the blob's lease duration.</value>
+        public LeaseDuration LeaseDuration { get; internal set; }
     }
 }

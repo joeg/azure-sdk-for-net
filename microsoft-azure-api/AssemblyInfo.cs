@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------------
 // <copyright file="AssemblyInfo.cs" company="Microsoft">
-//    Copyright 2011 Microsoft Corporation
+//    Copyright 2012 Microsoft Corporation
 //
 //    Licensed under the Apache License, Version 2.0 (the "License");
 //    you may not use this file except in compliance with the License.
@@ -94,3 +94,4 @@ using System.Security;
 [assembly: AllowPartiallyTrustedCallers]
 [assembly: SecurityTransparent]
 [assembly: NeutralResourcesLanguageAttribute("en-US")]
+[assembly: AssemblyVersion("1.7.1.0")]

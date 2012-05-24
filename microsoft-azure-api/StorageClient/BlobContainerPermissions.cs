@@ -1,6 +1,6 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="BlobContainerPermissions.cs" company="Microsoft">
-//    Copyright 2011 Microsoft Corporation
+//    Copyright 2012 Microsoft Corporation
 //
 //    Licensed under the Apache License, Version 2.0 (the "License");
 //    you may not use this file except in compliance with the License.
@@ -34,7 +34,7 @@ namespace Microsoft.WindowsAzure.StorageClient
         public BlobContainerPermissions()
         {
             this.PublicAccess = BlobContainerPublicAccessType.Off;
-            SharedAccessPolicies = new SharedAccessPolicies();
+            this.SharedAccessPolicies = new SharedAccessBlobPolicies();
         }
 
         /// <summary>
@@ -47,6 +47,6 @@ namespace Microsoft.WindowsAzure.StorageClient
         /// Gets the set of shared access policies for the container.
         /// </summary>
         /// <value>The set of shared access policies for the container.</value>
-        public SharedAccessPolicies SharedAccessPolicies { get; private set; }
+        public SharedAccessBlobPolicies SharedAccessPolicies { get; private set; }
     }
 }
