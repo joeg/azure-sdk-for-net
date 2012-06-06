@@ -22,6 +22,7 @@ using System;
 using System.Resources;
 using System.Runtime.CompilerServices;
 using System.Security;
+using System.Reflection;
 
 #if UNSIGNED
 [assembly: InternalsVisibleTo("Microsoft.WindowsAzure.StorageClient.Internal")]
