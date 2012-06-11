@@ -46,7 +46,21 @@ namespace Microsoft.WindowsAzure
             string resourceName,
             CloudBlobClient client)
         {
-            CommonUtils.AssertNotNull("policy", policy);
+            if (policy == null)
+            {
+                return GetSharedAccessSignatureHashImpl(
+                    null /* policy.Permissions */,
+                    null /* policy.SharedAccessStartTime */,
+                    null /* policy.SharedAccessExpiryTime */,
+                    null /* startPatitionKey (table only) */,
+                    null /* startRowKey (table only) */,
+                    null /* endPatitionKey (table only) */,
+                    null /* endRowKey (table only) */,
+                    false /* not using table SAS */,
+                    accessPolicyIdentifier,
+                    resourceName,
+                    client.Credentials);
+            }
 
             return GetSharedAccessSignatureHashImpl(
                 SharedAccessBlobPolicy.PermissionsToString(policy.Permissions),
@@ -76,7 +90,21 @@ namespace Microsoft.WindowsAzure
             string resourceName,
             CloudQueueClient client)
         {
-            CommonUtils.AssertNotNull("policy", policy);
+            if (policy == null)
+            {
+                return GetSharedAccessSignatureHashImpl(
+                    null /* policy.Permissions */,
+                    null /* policy.SharedAccessStartTime */,
+                    null /* policy.SharedAccessExpiryTime */,
+                    null /* startPatitionKey (table only) */,
+                    null /* startRowKey (table only) */,
+                    null /* endPatitionKey (table only) */,
+                    null /* endRowKey (table only) */,
+                    false /* not using table SAS */,
+                    accessPolicyIdentifier,
+                    resourceName,
+                    client.Credentials);
+            }
 
             return GetSharedAccessSignatureHashImpl(
                 SharedAccessQueuePolicy.PermissionsToString(policy.Permissions),
@@ -114,7 +142,21 @@ namespace Microsoft.WindowsAzure
             string resourceName,
             CloudTableClient client)
         {
-            CommonUtils.AssertNotNull("policy", policy);
+            if (policy == null)
+            {
+                return GetSharedAccessSignatureHashImpl(
+                    null /* policy.Permissions */,
+                    null /* policy.SharedAccessStartTime */,
+                    null /* policy.SharedAccessExpiryTime */,
+                    startPartitionKey,
+                    startRowKey,
+                    endPartitionKey,
+                    endRowKey,
+                    true /* using table SAS */,
+                    accessPolicyIdentifier,
+                    resourceName,
+                    client.Credentials);
+            }
 
             return GetSharedAccessSignatureHashImpl(
                 SharedAccessTablePolicy.PermissionsToString(policy.Permissions),
@@ -146,9 +188,25 @@ namespace Microsoft.WindowsAzure
             string signature,
             string accountKeyName)
         {
-            CommonUtils.AssertNotNull("policy", policy);
             CommonUtils.AssertNotNullOrEmpty("resourceType", resourceType);
             CommonUtils.AssertNotNull("signature", signature);
+
+            if (policy == null)
+            {
+                return GetSharedAccessSignatureImpl(
+                    null /* policy.Permissions */,
+                    null /* policy.SharedAccessStartTime */,
+                    null /* policy.SharedAccessExpiryTime */,
+                    null /* startPatitionKey (table only) */,
+                    null /* startRowKey (table only) */,
+                    null /* endPatitionKey (table only) */,
+                    null /* endRowKey (table only) */,
+                    accessPolicyIdentifier,
+                    resourceType,
+                    null /* tableName (table only) */,
+                    signature,
+                    accountKeyName);
+            }
 
             string permissions = SharedAccessBlobPolicy.PermissionsToString(policy.Permissions);
             if (String.IsNullOrEmpty(permissions))
@@ -185,8 +243,24 @@ namespace Microsoft.WindowsAzure
             string signature,
             string accountKeyName)
         {
-            CommonUtils.AssertNotNull("policy", policy);
             CommonUtils.AssertNotNull("signature", signature);
+
+            if (policy == null)
+            {
+                return GetSharedAccessSignatureImpl(
+                    null /* policy.Permissions */,
+                    null /* policy.SharedAccessStartTime */,
+                    null /* policy.SharedAccessExpiryTime */,
+                    null /* startPatitionKey (table only) */,
+                    null /* startRowKey (table only) */,
+                    null /* endPatitionKey (table only) */,
+                    null /* endRowKey (table only) */,
+                    accessPolicyIdentifier,
+                    null /* resourceType (blob only) */,
+                    null /* tableName (table only) */,
+                    signature,
+                    accountKeyName);
+            }
 
             string permissions = SharedAccessQueuePolicy.PermissionsToString(policy.Permissions);
             if (string.IsNullOrEmpty(permissions))
@@ -233,8 +307,24 @@ namespace Microsoft.WindowsAzure
             string signature,
             string accountKeyName)
         {
-            CommonUtils.AssertNotNull("policy", policy);
             CommonUtils.AssertNotNull("signature", signature);
+
+            if (policy == null)
+            {
+                return GetSharedAccessSignatureImpl(
+                    null /* policy.Permissions */,
+                    null /* policy.SharedAccessStartTime */,
+                    null /* policy.SharedAccessExpiryTime */,
+                    startPartitionKey,
+                    startRowKey,
+                    endPartitionKey,
+                    endRowKey,
+                    accessPolicyIdentifier,
+                    null /* resourceType (blob only) */,
+                    tableName,
+                    signature,
+                    accountKeyName);
+            }
 
             string permissions = SharedAccessTablePolicy.PermissionsToString(policy.Permissions);
             if (String.IsNullOrEmpty(permissions))
